@@ -37,28 +37,17 @@ jQuery(document).ready(function(){
 		}
 		
 	});
-	jQuery('div#options').hover(
-		function(){
-			jQuery('div.options_container').show();
-		},
-		function(){
-			jQuery('div.options_container').hide();
-		});
+	jQuery('div#options').click(function(){
+		jQuery('.options_container').toggle();
+}	);
 		
-	jQuery('div#options_container').hover(
-		function(){
-			//jQuery('div.options_container').show();
-		},
-		function(){
-			jQuery('div.options_container').hide();
-		}
-	);
+	
 	
 	jQuery('span#close_div').click(function(){
 		jQuery('div#img').hide();
 	});
 	
-	initialize();
+//	initialize();
 	//setTimeout(5000, function(){jQuery('#map_canvas').css('position','absolute');});
 });
 

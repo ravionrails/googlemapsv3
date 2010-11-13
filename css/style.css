@@ -61,36 +61,42 @@ hr{clear:both;margin-top:1px;}
 
 div#options{
 	width:85px;
-	background:transparent url(../images/settings.png) no-repeat left;
+	
 	border:2px solid black;
 	float:left;
 	padding:5px;
 	margin-top:-6px;
 }
 
-div.options_container {
+a#options_a{
+	background:transparent url(../images/settings.png) no-repeat left;
+	padding-left:25px;
+}
+li{list-style:none;}
+.options_container {
 	display:none;
 	width:45px;
-	position:relative;
+	margin-bottom:0px;
 	margin-top:13px;
 	z-index:100;
+	margin-left:-45px;
 }
 
-div.options_container a {
+.options_container a {
 	color:green;
 }
 
-div#images_div{
+#images_div{
 	background:transparent url(../images/images_icon.jpg) no-repeat left;
 	height:30px;
-	width:30px;
-	padding:0 0 0 35px;
+	width:60px;
+	padding:0 0 0 30px;
 }
-div#video_div{
+#video_div{
 	background:transparent url(../images/video_icon.jpg) no-repeat left;
 	height:30px;
-	width:30px;
-	padding:0 0 0 35px;
+	width:60px;
+	padding:0 0 0 30px;
 }
 
 div#img{
