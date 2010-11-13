@@ -23,10 +23,16 @@
 #input_from,  #input_to {color: grey; font-family:Cursive}
 #get_direction_submit{margin-left:48px;background:transparent url(../images/road.jpg) no-repeat left;padding-left:40px;}
 			#right{float:left;width:80%;height:500px;}
-			#map_options > a{background-color:#ffffff;margin:0 5px;padding:5px 40px 5px 2px;border:1px solid black;width:100px}
-			#map_options {padding:2px;text-align:right;height:25px;}
+			#map_options > a{background-color:#ffffff;margin:0 5px;padding:5px 40px 5px 2px;border:2px solid black;width:100px;color:grey;}
+			#map_options {padding:2px;text-align:right;height:25px;float:right}
 			#map_container{margin:o auto;clear:both;}
 hr{clear:both;margin-top:1px;}
+
+#reset_link{
+	background:transparent url(../images/reset.png) no-repeat right;
+	/*padding-left:40px;*/
+}
+
 
 .print_link{
 	background:transparent url(../images/icon_print.png) no-repeat left;
@@ -55,20 +61,18 @@ hr{clear:both;margin-top:1px;}
 
 div#options{
 	width:85px;
-	position:absolute;
-	right:390px;
 	background:transparent url(../images/settings.png) no-repeat left;
-	border:1px solid black;
+	border:2px solid black;
+	float:left;
 	padding:5px;
-	top:97px;
+	margin-top:-6px;
 }
 
 div.options_container {
 	display:none;
 	width:45px;
-	position:fixed;
-	right:435px;
-	top:134px;
+	position:relative;
+	margin-top:13px;
 	z-index:100;
 }
 
