@@ -47,7 +47,7 @@ jQuery(document).ready(function(){
 		jQuery('div#img').hide();
 	});
 	
-//	initialize();
+	initialize();
 	//setTimeout(5000, function(){jQuery('#map_canvas').css('position','absolute');});
 });
 
