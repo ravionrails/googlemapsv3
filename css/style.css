@@ -1,3 +1,8 @@
+#wrapper{
+	width:1200px;
+	margin:0 auto;
+}
+
 #header{
 	
 	height:100px;
@@ -5,10 +10,19 @@
 	width:1200px;vertical-align:middle;
 }
 
-#header #logo{height:100px;width:380px;float:left;}
-#search_div{width:800px;float:left;padding-top:40px;}
+#header #logo{height:100px;width:240px;float:left;}
+
+#search_div{width:950px;float:left;padding-top:40px;}
 #search_div input{}
-#search_div input[type=text]{height:34px;color:grey;font-size:25px;font-family:cursive;width:600px}
+
+#search_div input[type=text]{
+	height:34px;
+	color:grey;
+	font-size:25px;
+	font-family:cursive;
+	width:800px;
+}
+
 #search_div input[type=submit]{
 	height:45px;
 	padding-right:45px;
@@ -21,11 +35,25 @@
 #left  a{font-size:9pt;}
 #left  h2{font-size:15pt;background-color:BlanchedAlmond;text-align:center;margin-top:2px;}
 #input_from,  #input_to {color: grey; font-family:Cursive}
-#get_direction_submit{margin-left:48px;background:transparent url(../images/road.jpg) no-repeat left;padding-left:40px;}
-			#right{float:left;width:80%;height:500px;}
-			#map_options > a{background-color:#ffffff;margin:0 5px;padding:5px 40px 5px 2px;border:2px solid black;width:100px;color:grey;}
-			#map_options {padding:2px;text-align:right;height:25px;float:right}
-			#map_container{margin:o auto;clear:both;}
+#get_direction_submit{margin-left:0px;background:transparent url(../images/road.jpg) no-repeat left;padding-left:40px;}
+			
+#right{
+	float:left;
+	width:80%;
+	height:500px;
+	position:relative
+}
+
+#map_options > a{
+	background-color:#ffffff;margin:0 5px;padding:5px 40px 5px 2px;border:2px solid grey;width:100px;color:grey;
+}
+
+#map_options {
+	padding:5px 0px 5px 345px;height:25px;
+}
+
+#map_container{margin:o auto;clear:both;}
+
 hr{clear:both;margin-top:1px;}
 
 #reset_link{
@@ -60,17 +88,20 @@ hr{clear:both;margin-top:1px;}
 }
 
 div#options{
-	width:85px;
-	
-	border:2px solid black;
+	background-color:white;
+	border:2px solid grey;
 	float:left;
-	padding:5px;
 	margin-top:-6px;
+	padding:5px;
+	position:relative;
+	width:85px;
+	z-index:100;
 }
 
 a#options_a{
 	background:transparent url(../images/settings.png) no-repeat left;
 	padding-left:25px;
+	color:grey;
 }
 li{list-style:none;}
 .options_container {
@@ -84,7 +115,7 @@ li{list-style:none;}
 }
 
 .options_container a {
-	color:green;
+	color:grey;
 }
 
 #images_div{
@@ -132,6 +163,6 @@ html { height: 100% }
   body { height: 100%; margin: 0px; padding: 0px }
 a{text-decoration:none;}
   
-#map_canvas { height: 600px;position:absolute;width:1000px }
+#map_canvas { height: 600px;position:absolute;width:940px;top:40px; }
 
 

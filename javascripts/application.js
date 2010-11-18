@@ -20,13 +20,13 @@ jQuery(document).ready(function(){
 	});
 
 	jQuery("#search_div > input[type=submit]").click(function(){
-	var l_str = jQuery('this').prev('input').val();
-	console.log(l_str );
-	var lat = parseFloat( l_str.split(',')[0] );
-	var lng = parseFloat( l_str.split(',')[1] );
-	console.log(lat);
-	console.log(lng);
-	search(lat, lng);	
+		var l_str = jQuery(this).prev('input').val();
+		console.log(l_str );
+		var lat = parseFloat( l_str.split(',')[0] );
+		var lng = parseFloat( l_str.split(',')[1] );
+		console.log(lat);
+		console.log(lng);
+		search(lat, lng);	
 	});
 
 	jQuery("#input_from, #input_to").click(function(){
@@ -54,28 +54,8 @@ jQuery(document).ready(function(){
 	});
 	
 	initialize();
-	//setTimeout(5000, function(){jQuery('#map_canvas').css('position','absolute');});
+
 });
-
-function search(lat, lang){
-    var searched_latlng = new google.maps.LatLng(lat, lang);
-    var myOptions = {
-      zoom: 14,
-      center: search_latlng,
-      mapTypeId: google.maps.MapTypeId.HYBRID ,
-      disableDefaultUI: true,
-
-    };
-
-  	var temp_map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
-
-	
-	var searched_marker = new google.maps.Marker({
-          position: searched_latlng,
-          map: temp_map,
-	  	  title:"Searched Place"
-	});
-}
 
 function initialize() {
     var start_point = new google.maps.LatLng(26.745148,	 83.889262);
@@ -133,6 +113,29 @@ function initialize() {
 
 	  
   }
+
+
+
+	function search(lat, lang){
+		var search_latlng = new google.maps.LatLng(lat, lang);
+		var myOptions = {
+		  zoom: 14,
+		  center: search_latlng,
+		  mapTypeId: google.maps.MapTypeId.HYBRID ,
+		  disableDefaultUI: true,
+
+		};
+
+	  	var temp_map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+
+	
+		var searched_marker = new google.maps.Marker({
+		      position: search_latlng,
+		      map: temp_map,
+		  	  title:"Searched Place (" + lat + ' , ' + lang + ' )'
+		});
+	}
+
   
   function video(){
 	var ur = '<object width="480" height="385"><param name="movie" value="http://www.youtube.com/v/0x0irHvLC78?fs=1&amp;hl=en_GB"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/0x0irHvLC78?fs=1&amp;hl=en_GB" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="480" height="385"></embed></object>';
