@@ -20,7 +20,13 @@ jQuery(document).ready(function(){
 	});
 
 	jQuery("#search_div > input[type=submit]").click(function(){
-		search();	
+	var l_str = jQuery('this').prev('input').val();
+	console.log(l_str );
+	var lat = parseFloat( l_str.split(',')[0] );
+	var lng = parseFloat( l_str.split(',')[1] );
+	console.log(lat);
+	console.log(lng);
+	search(lat, lng);	
 	});
 
 	jQuery("#input_from, #input_to").click(function(){
@@ -51,32 +57,31 @@ jQuery(document).ready(function(){
 	//setTimeout(5000, function(){jQuery('#map_canvas').css('position','absolute');});
 });
 
-function search(){
-    var police_latlng = new google.maps.LatLng(26.444344,83.532246);
+function search(lat, lang){
+    var searched_latlng = new google.maps.LatLng(lat, lang);
     var myOptions = {
-      zoom: 19,
-      center: police_latlng,
-      mapTypeId: google.maps.MapTypeId.ROAD ,
+      zoom: 14,
+      center: search_latlng,
+      mapTypeId: google.maps.MapTypeId.HYBRID ,
       disableDefaultUI: true,
 
     };
-    	var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+
+  	var temp_map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
 
 	
-	var police = 'images/icon/police.png';
-	var police_marker = new google.maps.Marker({
-          position: police_latlng,
-          map: map,
-	  icon: police,
-          title:"Police Station"
+	var searched_marker = new google.maps.Marker({
+          position: searched_latlng,
+          map: temp_map,
+	  	  title:"Searched Place"
 	});
 }
 
 function initialize() {
-    var start_point = new google.maps.LatLng(26.442763,83.532351);
+    var start_point = new google.maps.LatLng(26.745148,	 83.889262);
 	
     var myOptions = {
-      zoom: 17,
+      zoom: 14,
       center: start_point,
       mapTypeId: google.maps.MapTypeId.ROADMAP ,
       disableDefaultUI: true,
@@ -104,7 +109,7 @@ function initialize() {
 
 
 	function satellite_view(){
-		map.setMapTypeId(google.maps.MapTypeId.SATELLITE);
+		map.setMapTypeId(google.maps.MapTypeId.HYBRID);
 	}
 
 	function roadmap_view(){
