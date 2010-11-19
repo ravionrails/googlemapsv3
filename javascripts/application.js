@@ -19,16 +19,6 @@ jQuery(document).ready(function(){
 		
 	});
 
-	jQuery("#search_div > input[type=submit]").click(function(){
-		var l_str = jQuery(this).prev('input').val();
-		console.log(l_str );
-		var lat = parseFloat( l_str.split(',')[0] );
-		var lng = parseFloat( l_str.split(',')[1] );
-		console.log(lat);
-		console.log(lng);
-		search(lat, lng);	
-	});
-
 	jQuery("#input_from, #input_to").click(function(){
 		if( jQuery(this).val() == jQuery(this).attr('rel') ){
 			jQuery(this).val('');
@@ -52,9 +42,7 @@ jQuery(document).ready(function(){
 		jQuery('div#img').hide();
 	});
 
-	jQuery('#get_direction_submit').click(function(){
-		search_path();
-	});
+	
 	
 	initialize();
 
@@ -73,6 +61,7 @@ function initialize() {
     
 	var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
 
+	// click event added for zooming
 	google.maps.event.addListener(map, 'click', function(event) {
 	    zoomin(event.latLng);
 	});
@@ -103,7 +92,6 @@ function initialize() {
 	kushinagar_points(map);
     	
 	kushinagar_roads(map);
-
 	
 	// Removes the overlays from the map, but keeps them in the array
 	function clearOverlays() {
@@ -114,45 +102,22 @@ function initialize() {
 	  }
 	}
 
-	  
-  }
-
-
-
-	function search(lat, lang){
-		var search_latlng = new google.maps.LatLng(lat, lang);
-		var myOptions = {
-		  zoom: 14,
-		  center: search_latlng,
-		  mapTypeId: google.maps.MapTypeId.HYBRID ,
-		  disableDefaultUI: true,
-
-		};
-
-	  	var temp_map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
-
-	
-		var searched_marker = new google.maps.Marker({
-		      position: search_latlng,
-		      map: temp_map,
-		  	  title:"Searched Place (" + lat + ' , ' + lang + ' )'
-		});
-	}
+	jQuery('#get_direction_submit').click(function(){
+		search_path();
+	});
 
 	function search_path(){
 		var directionsService = new google.maps.DirectionsService();
    		var directionsDisplay = new google.maps.DirectionsRenderer({  draggable: true });
-		var myOptions = {
-			 zoom:7,
-			 mapTypeId: google.maps.MapTypeId.ROADMAP
-		   }
-
-		   var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
-		   directionsDisplay.setMap(map);
-
+		directionsDisplay.setMap(map);
+		var fr = jQuery('input#input_from').val()
+		var to = jQuery('input#input_to').val() 		
+//		var w1 = new google.maps.LatLng(26.737497,83.896229);
 		   var request = {
-			   origin: jQuery('input#input_from').val(),
-			   destination: jQuery('input#input_to').val(),
+			   origin: fr,
+			   destination: to,
+	//			waypoints: [{  location:w1,  stopover:true	}],
+
 			   travelMode: google.maps.DirectionsTravelMode.DRIVING,
 				unitSystem: google.maps.DirectionsUnitSystem.METRIC
 		   };
@@ -161,15 +126,37 @@ function initialize() {
 			  if (status == google.maps.DirectionsStatus.OK) {
 				directionsDisplay.setDirections(response);
 				jQuery('#direction_panel').html("");
-				var dist = 	"<div>Distance = " + response.routes[0].legs[0].distance.value/1000 + 'KM</div>'
-				var dur = "TIMe = " + response.routes[0].legs[0].duration.value/3600 + 'Hours' ;
+				var dist = 	"<div>DISTANCE = " + response.routes[0].legs[0].distance.value/1000 + '(in Kms)</div>'
+				var dur = "TIME = " + response.routes[0].legs[0].duration.value/3600 + '(in Hrs)' ;
 				jQuery('#direction_panel').html(dist + dur);
 			  }
 
 		   });
 
+	};  
+
+
+	jQuery("#search_div > input[type=submit]").click(function(){
+		var l_str = jQuery(this).prev('input').val();
+		var lat = parseFloat( l_str.split(',')[0] );
+		var lng = parseFloat( l_str.split(',')[1] );
+		search(lat, lng);	
+	});
+
+	// function to look up lat lang on google map with putting marker 
+	function search(lat, lang){
+		var search_latlng = new google.maps.LatLng(lat, lang);
+		var searched_marker = new google.maps.Marker({
+		      position: search_latlng,
+		      map: map,
+		  	  title:"Searched Place (" + lat + ' , ' + lang + ' )'
+		});
+	}
+
+	  
+  }// initialize ends here
+
 	
-	}  
 
 
   function video(){
