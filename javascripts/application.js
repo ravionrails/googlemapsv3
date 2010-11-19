@@ -165,18 +165,6 @@ function initialize() {
 				var dur = "TIMe = " + response.routes[0].legs[0].duration.value/3600 + 'Hours' ;
 				jQuery('#direction_panel').html(dist + dur);
 			  }
-			else if (status == google.maps.DirectionsStatus.) {
-				alert('');
-			}
-			else if (status == google.maps.DirectionsStatus.) {
-				alert('');
-			}
-			else if (status == google.maps.DirectionsStatus.) {
-				alert('');
-			}
-			else if (status == google.maps.DirectionsStatus.) {
-				alert('');
-			}
 
 		   });
 
