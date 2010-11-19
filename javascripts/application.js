@@ -45,12 +45,15 @@ jQuery(document).ready(function(){
 	});
 	jQuery('div#options').click(function(){
 		jQuery('.options_container').toggle();
-}	);
+	});
 		
-	
 	
 	jQuery('span#close_div').click(function(){
 		jQuery('div#img').hide();
+	});
+
+	jQuery('#get_direction_submit').click(function(){
+		search_path();
 	});
 	
 	initialize();
@@ -136,7 +139,51 @@ function initialize() {
 		});
 	}
 
-  
+	function search_path(){
+		var directionsService = new google.maps.DirectionsService();
+   		var directionsDisplay = new google.maps.DirectionsRenderer({  draggable: true });
+		var myOptions = {
+			 zoom:7,
+			 mapTypeId: google.maps.MapTypeId.ROADMAP
+		   }
+
+		   var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+		   directionsDisplay.setMap(map);
+
+		   var request = {
+			   origin: jQuery('input#input_from').val(),
+			   destination: jQuery('input#input_to').val(),
+			   travelMode: google.maps.DirectionsTravelMode.DRIVING,
+				unitSystem: google.maps.DirectionsUnitSystem.METRIC
+		   };
+
+		   directionsService.route(request, function(response, status) {
+			  if (status == google.maps.DirectionsStatus.OK) {
+				directionsDisplay.setDirections(response);
+				jQuery('#direction_panel').html("");
+				var dist = 	"<div>Distance = " + response.routes[0].legs[0].distance.value/1000 + 'KM</div>'
+				var dur = "TIMe = " + response.routes[0].legs[0].duration.value/3600 + 'Hours' ;
+				jQuery('#direction_panel').html(dist + dur);
+			  }
+			else if (status == google.maps.DirectionsStatus.) {
+				alert('');
+			}
+			else if (status == google.maps.DirectionsStatus.) {
+				alert('');
+			}
+			else if (status == google.maps.DirectionsStatus.) {
+				alert('');
+			}
+			else if (status == google.maps.DirectionsStatus.) {
+				alert('');
+			}
+
+		   });
+
+	
+	}  
+
+
   function video(){
 	var ur = '<object width="480" height="385"><param name="movie" value="http://www.youtube.com/v/0x0irHvLC78?fs=1&amp;hl=en_GB"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/0x0irHvLC78?fs=1&amp;hl=en_GB" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="480" height="385"></embed></object>';
 	return ur;
