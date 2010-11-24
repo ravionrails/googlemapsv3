@@ -95,7 +95,7 @@ div#options{
 	padding:5px;
 	position:relative;
 	width:85px;
-	z-index:100;
+	z-index:1;
 }
 
 a#options_a{
