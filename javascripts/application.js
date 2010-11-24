@@ -1,6 +1,11 @@
 jQuery(document).ready(function(){
 
-	var places = ["Police Station", "Buddha"]
+	var places = []
+
+	for(var i in kushinagar_places) {
+		places.push(i);
+	}
+
 	jQuery("#search_div > input[type=text]").autocomplete({source: places});
 
 	jQuery("#search_div > input[type=text]").click(function(){
@@ -52,7 +57,7 @@ function initialize() {
     var start_point = new google.maps.LatLng(26.745148,	 83.889262);
 	
     var myOptions = {
-      zoom: 14,
+      zoom: 18,
       center: start_point,
       mapTypeId: google.maps.MapTypeId.ROADMAP ,
       disableDefaultUI: true,
@@ -87,7 +92,6 @@ function initialize() {
 	function roadmap_view(){
 		map.setMapTypeId(google.maps.MapTypeId.ROADMAP);
 	}
-
 
 	kushinagar_points(map);
     	
@@ -138,19 +142,38 @@ function initialize() {
 
 	jQuery("#search_div > input[type=submit]").click(function(){
 		var l_str = jQuery(this).prev('input').val();
-		var lat = parseFloat( l_str.split(',')[0] );
-		var lng = parseFloat( l_str.split(',')[1] );
-		search(lat, lng);	
+		if(typeof kushinagar_places[l_str] != 'undefined'){
+			var lat = kushinagar_places[l_str].sa ;//parseFloat( l_str.split(',')[0] );
+			var lng = kushinagar_places[l_str].ta ; //parseFloat( l_str.split(',')[1] );
+		}
+		else {
+			var g = new google.maps.Geocoder();
+			g.geocode({ address : l_str}, function(results, status) {
+			  if (status == google.maps.GeocoderStatus.OK) {
+				map.setCenter(results[0].geometry.location);
+				var marker = new google.maps.Marker({
+				    map: map, 
+				    position: results[0].geometry.location
+				});
+			  } else {
+				alert("Geocode was not successful for the following reason: " + status);
+			  }
+			})
+		}
+		
+		search(lat, lng, l_str);	
 	});
 
 	// function to look up lat lang on google map with putting marker 
-	function search(lat, lang){
+	function search(lat, lang, place){
 		var search_latlng = new google.maps.LatLng(lat, lang);
 		var searched_marker = new google.maps.Marker({
 		      position: search_latlng,
 		      map: map,
-		  	  title:"Searched Place (" + lat + ' , ' + lang + ' )'
+		  	  title:"Searched Place : "+  place +" at (" + lat + ' , ' + lang + ' )'
 		});
+		map.setCenter(search_latlng);
+		
 	}
 
 	  
