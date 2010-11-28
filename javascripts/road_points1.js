@@ -1,4 +1,5 @@
 var road1_points = [ 
+ new google.maps.LatLng( 26.745326,83.888842),
  new google.maps.LatLng( 26.745148,	 83.889262),
  new google.maps.LatLng( 26.745109,	 83.889341),
  new google.maps.LatLng( 26.745075,	 83.889400),

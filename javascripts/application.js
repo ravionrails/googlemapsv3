@@ -54,10 +54,12 @@ jQuery(document).ready(function(){
 });
 
 function initialize() {
-    var start_point = new google.maps.LatLng(26.745148,	 83.889262);
+	var markersArray = [];
+
+    var start_point = new google.maps.LatLng(26.736807,83.897345);
 	
     var myOptions = {
-      zoom: 18,
+      zoom: 15,
       center: start_point,
       mapTypeId: google.maps.MapTypeId.ROADMAP ,
       disableDefaultUI: true,
@@ -73,6 +75,7 @@ function initialize() {
 
 	function zoomin(location) {
 	  map.setZoom(map.getZoom()+1);
+	  //console.log(map.getZoom());
 	  map.setCenter(location);
 	}
 
@@ -105,15 +108,35 @@ function initialize() {
 		}
 	  }
 	}
+	
+	// Shows any overlays currently in the array
+	function showOverlays() {
+	  if (markersArray) {
+		for (i in markersArray) {
+		  markersArray[i].setMap(map);
+		}
+	  }
+	}
+
+	// Deletes all markers in the array by removing references to them
+	function deleteOverlays() {
+	  if (markersArray) {
+		for (i in markersArray) {
+		  markersArray[i].setMap(null);
+		}
+		markersArray.length = 0;
+	  }
+	}
 
 	jQuery('#get_direction_submit').click(function(){
 		search_path();
 	});
 
 	function search_path(){
+		deleteOverlays();
+		
 		var directionsService = new google.maps.DirectionsService();
    		var directionsDisplay = new google.maps.DirectionsRenderer({  draggable: true });
-		directionsDisplay.setMap(map);
 		var fr = jQuery('input#input_from').val()
 		var to = jQuery('input#input_to').val() 		
 //		var w1 = new google.maps.LatLng(26.737497,83.896229);
@@ -128,7 +151,8 @@ function initialize() {
 
 		   directionsService.route(request, function(response, status) {
 			  if (status == google.maps.DirectionsStatus.OK) {
-				directionsDisplay.setDirections(response);
+			  	directionsDisplay.setDirections(response);
+				directionsDisplay.setMap(map);
 				jQuery('#direction_panel').html("");
 				var dist = 	"<div>DISTANCE = " + response.routes[0].legs[0].distance.value/1000 + '(in Kms)</div>'
 				var dur = "TIME = " + response.routes[0].legs[0].duration.value/3600 + '(in Hrs)' ;
@@ -143,36 +167,29 @@ function initialize() {
 	jQuery("#search_div > input[type=submit]").click(function(){
 		var l_str = jQuery(this).prev('input').val();
 		if(typeof kushinagar_places[l_str] != 'undefined'){
-			var lat = kushinagar_places[l_str].sa ;//parseFloat( l_str.split(',')[0] );
-			var lng = kushinagar_places[l_str].ta ; //parseFloat( l_str.split(',')[1] );
+			var lat = kushinagar_places[l_str].va ;//parseFloat( l_str.split(',')[0] );
+			var lng = kushinagar_places[l_str].wa ; //parseFloat( l_str.split(',')[1] );					
+			search(lat, lng, l_str);
 		}
 		else {
-			var g = new google.maps.Geocoder();
-			g.geocode({ address : l_str}, function(results, status) {
-			  if (status == google.maps.GeocoderStatus.OK) {
-				map.setCenter(results[0].geometry.location);
-				var marker = new google.maps.Marker({
-				    map: map, 
-				    position: results[0].geometry.location
-				});
-			  } else {
-				alert("Geocode was not successful for the following reason: " + status);
-			  }
-			})
+			alert('Currently this point is not Mapped , Wait for second release cycle');
 		}
 		
-		search(lat, lng, l_str);	
+			
 	});
 
 	// function to look up lat lang on google map with putting marker 
 	function search(lat, lang, place){
+		deleteOverlays();
 		var search_latlng = new google.maps.LatLng(lat, lang);
 		var searched_marker = new google.maps.Marker({
 		      position: search_latlng,
 		      map: map,
 		  	  title:"Searched Place : "+  place +" at (" + lat + ' , ' + lang + ' )'
 		});
+		markersArray.push(searched_marker);
 		map.setCenter(search_latlng);
+		map.setZoom(20);
 		
 	}
 
