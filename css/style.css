@@ -31,7 +31,7 @@
 	margin-left:-4px;
 	font-family:Comic Sans MS;	
 }
-#left{float:left;width:20%;height:500px;overflow:scroll;text-align:center;}
+#left{float:left;width:20%;height:650px;overflow:scroll;text-align:center;}
 #left  a{font-size:9pt;}
 #left  h2{font-size:15pt;background-color:BlanchedAlmond;text-align:center;margin-top:2px;}
 #input_from,  #input_to {color: grey; font-family:Cursive}
