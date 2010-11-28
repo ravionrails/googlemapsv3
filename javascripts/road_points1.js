@@ -92,3 +92,8 @@ var road1_points = [
  new google.maps.LatLng( 26.727124,	 83.910300)
 
 ];
+
+var road2_points = [
+	new google.maps.LatLng( 26.744962,83.889480 ),
+	new google.maps.LatLng( 26.745568,83.889844 )
+];
