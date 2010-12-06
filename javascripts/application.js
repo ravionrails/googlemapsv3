@@ -134,6 +134,7 @@ function initialize() {
 
 	function search_path(){
 		deleteOverlays();
+//		initialize();
 		
 		var directionsService = new google.maps.DirectionsService();
    		var directionsDisplay = new google.maps.DirectionsRenderer({  draggable: true });
@@ -167,8 +168,9 @@ function initialize() {
 	jQuery("#search_div > input[type=submit]").click(function(){
 		var l_str = jQuery(this).prev('input').val();
 		if(typeof kushinagar_places[l_str] != 'undefined'){
-			var lat = kushinagar_places[l_str].va ;//parseFloat( l_str.split(',')[0] );
-			var lng = kushinagar_places[l_str].wa ; //parseFloat( l_str.split(',')[1] );					
+			console.debug("point = %o" , kushinagar_places[l_str]);
+			var lat = kushinagar_places[l_str].ya ;//parseFloat( l_str.split(',')[0] );
+			var lng = kushinagar_places[l_str].za ; //parseFloat( l_str.split(',')[1] );					
 			search(lat, lng, l_str);
 		}
 		else {
@@ -180,8 +182,9 @@ function initialize() {
 
 	// function to look up lat lang on google map with putting marker 
 	function search(lat, lang, place){
-		deleteOverlays();
+		wadeleteOverlays();
 		var search_latlng = new google.maps.LatLng(lat, lang);
+				console.log("search = "+ search_latlng);
 		var searched_marker = new google.maps.Marker({
 		      position: search_latlng,
 		      map: map,

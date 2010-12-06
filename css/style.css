@@ -34,7 +34,7 @@
 #left{float:left;width:20%;height:650px;overflow:scroll;text-align:center;}
 #left  a{font-size:9pt;}
 #left  h2{font-size:15pt;background-color:BlanchedAlmond;text-align:center;margin-top:2px;}
-#input_from,  #input_to {color: grey; font-family:Cursive}
+#input_from,  #input_to {font-family:Cursive}
 #get_direction_submit{margin-left:0px;background:transparent url(../images/road.jpg) no-repeat left;padding-left:40px;}
 			
 #right{
