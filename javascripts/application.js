@@ -169,9 +169,9 @@ function initialize() {
 		var l_str = jQuery(this).prev('input').val();
 		if(typeof kushinagar_places[l_str] != 'undefined'){
 			//console.debug("point = %o" , kushinagar_places[l_str]);
-			var lat = kushinagar_places[l_str].ya ;//parseFloat( l_str.split(',')[0] );
-			var lng = kushinagar_places[l_str].za ; //parseFloat( l_str.split(',')[1] );					
-			search(lat, lng, l_str);
+			//var lat = kushinagar_places[l_str].wa ;//parseFloat( l_str.split(',')[0] );
+			//var lng = kushinagar_places[l_str].xa ; //parseFloat( l_str.split(',')[1] );					
+			search(l_str, kushinagar_places[l_str]);
 		}
 		else {
 			alert('Currently this point is not Mapped , Wait for second release cycle');
@@ -181,17 +181,17 @@ function initialize() {
 	});
 
 	// function to look up lat lang on google map with putting marker 
-	function search(lat, lang, place){
+	function search(place,point){
 		deleteOverlays();
-		var search_latlng = new google.maps.LatLng(lat, lang);
+		//var search_latlng = new google.maps.LatLng(lat, lang);
 		//		console.log("search = "+ search_latlng);
 		var searched_marker = new google.maps.Marker({
-		      position: search_latlng,
+		      position: point,
 		      map: map,
-		  	  title:"Searched Place : "+  place +" at (" + lat + ' , ' + lang + ' )'
+		  	  title:"Searched Place : "+  place 
 		});
 		markersArray.push(searched_marker);
-		map.setCenter(search_latlng);
+		map.setCenter(point);
 		map.setZoom(20);
 		
 	}
